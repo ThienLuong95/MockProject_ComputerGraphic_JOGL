@@ -4,7 +4,10 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
-import com.jogl.Line;
+import com.jogl.sample.Cube;
+import com.jogl.sample.Line;
+import com.jogl.sample.TriangleDepth;
+import com.jogl.sample.TriangleRotation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,11 +42,19 @@ public class MainFrame extends JFrame {
         GLCapabilities capabilities = new GLCapabilities(profile);
 
         center_display_canvas = new GLCanvas(capabilities);
-        Line line = new Line();
-        center_display_canvas.addGLEventListener(line);
-        getContentPane().add(center_display_canvas, BorderLayout.CENTER);
 
-        FPSAnimator animator = new FPSAnimator(center_display_canvas, 60);
+//        Line line = new Line();
+//        TriangleRotation triangleRotation = new TriangleRotation();
+//        center_display_canvas.addGLEventListener(triangleRotation);
+//        center_display_canvas.addGLEventListener(line);
+//        TriangleDepth triangleDepth = new TriangleDepth();
+//        center_display_canvas.addGLEventListener(triangleDepth);
+         Cube cube = new Cube();
+        center_display_canvas.addGLEventListener(cube);
+
+
+        getContentPane().add(center_display_canvas, BorderLayout.CENTER);
+        FPSAnimator animator = new FPSAnimator(center_display_canvas, 60, true);
         animator.start();
     }
 }
