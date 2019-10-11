@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="ui.swing.intellij.MainFrame">
+  <grid id="27dc6" binding="root_panel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="c4961" binding="top_header_panel" custom-create="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties>
+          <background color="-10175683"/>
+          <foreground color="-10175683"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <grid id="d6130" binding="left_control_panel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="West"/>
+        <properties>
+          <background color="-4501714"/>
+          <foreground color="-4501714"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <grid id="fac74" binding="bottom_status_panel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="South"/>
+        <properties>
+          <background color="-4508245"/>
+          <foreground color="-4508245"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <grid id="2be1e" binding="right_control_panel" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="East"/>
+        <properties>
+          <background color="-4509098"/>
+          <foreground color="-4509098"/>
+        </properties>
+        <border type="none"/>
+        <children/>
+      </grid>
+    </children>
+  </grid>
+</form>
