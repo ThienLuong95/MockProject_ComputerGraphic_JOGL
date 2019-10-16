@@ -4,8 +4,7 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
-import com.jogl.Grid;
-import com.jogl.sample.*;
+import tutorial.sgame.GameTutorial;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,8 +37,8 @@ public class MainFrame extends JFrame {
     {
         GLProfile profile = GLProfile.get(GLProfile.GL2);
         GLCapabilities capabilities = new GLCapabilities(profile);
-
-        center_display_canvas = new GLCanvas(capabilities);
+        GameTutorial gameTutorial = new GameTutorial(capabilities);
+        center_display_canvas =gameTutorial;
 
 //        Line line = new Line();
 //        TriangleRotation triangleRotation = new TriangleRotation();
@@ -49,8 +48,11 @@ public class MainFrame extends JFrame {
 //        center_display_canvas.addGLEventListener(triangleDepth);
 //         Cube cube = new Cube();
 //         CubeTexture cube = new CubeTexture();
-        Grid grid = new Grid();
-        center_display_canvas.addGLEventListener(grid);
+//        Grid grid = new Grid();
+        center_display_canvas.addGLEventListener(gameTutorial);
+        center_display_canvas.addKeyListener(gameTutorial);
+        center_display_canvas.addMouseListener(gameTutorial);
+
 
 
         getContentPane().add(center_display_canvas, BorderLayout.CENTER);

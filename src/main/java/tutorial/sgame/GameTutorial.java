@@ -1,20 +1,13 @@
-package tutorial.keyboardmouse;
+package tutorial.sgame;
 
-import com.jogamp.opengl.GL;
-import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GLAutoDrawable;
-import com.jogamp.opengl.GLEventListener;
+import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
-import com.jogamp.opengl.glu.gl2.GLUgl2;
-import com.jogamp.opengl.util.Animator;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 
-public class KeyBoardAndMouseSample implements GLEventListener, KeyListener, MouseListener {
+public class GameTutorial extends GLCanvas implements GLEventListener, KeyListener, MouseListener {
     private Game game;
     private static Point center;
     private Point mousePos;
@@ -28,6 +21,10 @@ public class KeyBoardAndMouseSample implements GLEventListener, KeyListener, Mou
     private int strafer=KeyEvent.VK_D;
     private int shoot= InputEvent.BUTTON1_MASK;
     private int use=InputEvent.BUTTON3_MASK;
+
+    public GameTutorial(GLCapabilities capabilities) {
+        super(capabilities);
+    }
     @Override
     public void init(GLAutoDrawable drawable) {
         GL2 gl = drawable.getGL().getGL2();
@@ -37,7 +34,7 @@ public class KeyBoardAndMouseSample implements GLEventListener, KeyListener, Mou
         GLU glu=new GLU();
         gl.glViewport(0, 0, w, h);
         gl.glMatrixMode(gl.GL_PROJECTION);
-        glu.gluPerspective(45.0f, ((float)w/(float)h), 0.1f, 100.0f);
+        glu.gluPerspective(60.0f, ((float)w/(float)h), 0.1f, 100.0f);
         gl.glMatrixMode(gl.GL_MODELVIEW);
         gl.glShadeModel(gl.GL_SMOOTH);
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -71,43 +68,43 @@ public class KeyBoardAndMouseSample implements GLEventListener, KeyListener, Mou
         gl.glViewport(0, 0, width, height);
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
-        glu.gluPerspective(45.0f, h, 1.0, 20.0);
+        glu.gluPerspective(60.0f, h, 1.0, 100.0);
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glLoadIdentity();
         center=new Point(x+width/2, y+height/2);
 
         game.setMouseCenter(center);
     }
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("JOGL Events");
-        Toolkit t=Toolkit.getDefaultToolkit();
-        Image img=new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
-        Cursor pointer=t.createCustomCursor(img, new Point(0,0), "none");
-        GLCanvas canvas = new GLCanvas();
-        KeyBoardAndMouseSample sample= new KeyBoardAndMouseSample();
-        canvas.addGLEventListener(sample);
-        canvas.addKeyListener(sample);
-        canvas.addMouseListener(sample);
-        canvas.setFocusable(true);
-        canvas.requestFocus();
-        frame.add(canvas);
-        frame.setUndecorated(true);
-        frame.setSize(1024, 768);
-        frame.setLocationRelativeTo(null);
-        frame.setCursor(pointer);
-        frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        GraphicsEnvironment ge=GraphicsEnvironment.getLocalGraphicsEnvironment();
-        if(fullscreen){
-            ge.getDefaultScreenDevice().setFullScreenWindow(frame);
-        }
-
-        final Animator animator = new Animator(canvas);
-        animator.setRunAsFastAsPossible(true);
-        animator.start();
-        Rectangle r=frame.getBounds();
-        center=new Point(r.x+r.width/2, r.y+r.height/2);
-    }
+//    public static void main(String[] args) {
+//        JFrame frame = new JFrame("JOGL Events");
+//        Toolkit t=Toolkit.getDefaultToolkit();
+//        Image img=new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+//        Cursor pointer=t.createCustomCursor(img, new Point(0,0), "none");
+//        GLCanvas canvas = new GLCanvas();
+//        GameTutorial sample= new GameTutorial();
+//        canvas.addGLEventListener(sample);
+//        canvas.addKeyListener(sample);
+//        canvas.addMouseListener(sample);
+//        canvas.setFocusable(true);
+//        canvas.requestFocus();
+//        frame.add(canvas);
+//        frame.setUndecorated(true);
+//        frame.setSize(1024, 768);
+//        frame.setLocationRelativeTo(null);
+//        frame.setCursor(pointer);
+//        frame.setVisible(true);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        GraphicsEnvironment ge=GraphicsEnvironment.getLocalGraphicsEnvironment();
+//        if(fullscreen){
+//            ge.getDefaultScreenDevice().setFullScreenWindow(frame);
+//        }
+//
+//        final Animator animator = new Animator(canvas);
+//        animator.setRunAsFastAsPossible(true);
+//        animator.start();
+//        Rectangle r=frame.getBounds();
+//        center=new Point(r.x+r.width/2, r.y+r.height/2);
+//    }
 
     @Override
     public void keyTyped(KeyEvent e) {
