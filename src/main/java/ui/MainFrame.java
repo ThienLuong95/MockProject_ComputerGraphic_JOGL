@@ -4,8 +4,8 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
-import com.jogl.Grid;
 import com.jogl.sample.*;
+import component.Grid;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,9 +49,8 @@ public class MainFrame extends JFrame {
 //        center_display_canvas.addGLEventListener(triangleDepth);
 //         Cube cube = new Cube();
 //         CubeTexture cube = new CubeTexture();
-        Grid grid = new Grid();
-        center_display_canvas.addGLEventListener(grid);
-
+        DisplayManager displayManager = new DisplayManager();
+        center_display_canvas.addGLEventListener(displayManager);
 
         getContentPane().add(center_display_canvas, BorderLayout.CENTER);
         FPSAnimator animator = new FPSAnimator(center_display_canvas, 60, true);
