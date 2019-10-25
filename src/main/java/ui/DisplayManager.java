@@ -8,17 +8,21 @@ import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 import common.Point3D;
 import component.Grid;
+import component.Robot;
 
-    public class DisplayManager implements GLEventListener {
+public class DisplayManager implements GLEventListener {
         private int w=1024;
         private int h=768;
         private GLU glu;
         private Grid grid;
         private int lineCount= 10;
+        private Robot robot;
 
         public DisplayManager() {
             glu =  new GLU();
-            grid = new Grid(new Point3D(), 10);
+            grid = new Grid(new Point3D(0f,0f, 0f), lineCount);
+            robot = new Robot(new Point3D(0f, 0f, 0f));
+
         }
     @Override
     public void init(GLAutoDrawable drawable) {
@@ -49,6 +53,7 @@ import component.Grid;
         GL2 gl = drawable.getGL().getGL2();
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
         grid.Display(gl);
+        robot.Display(gl);
         gl.glFlush();
     }
 

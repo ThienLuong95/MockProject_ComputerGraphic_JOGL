@@ -48,8 +48,8 @@ public class Point3D {
     public void increaseZ(double z) {
         this.z+=z;
     }
-    public void translateTo(GL2 gl3) {
-        gl3.glTranslated(this.x, this.y, this.z);
+    public void translateTo(GL2 gl2) {
+        gl2.glTranslated(this.x, this.y, this.z);
     }
     public static Point3D GetPoint(double x, double y, double z) {
         return new Point3D(x, y, z);
