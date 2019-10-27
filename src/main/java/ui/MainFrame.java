@@ -6,6 +6,7 @@ import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.jogl.sample.*;
 import component.Grid;
+import event.KeyHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,7 +52,7 @@ public class MainFrame extends JFrame {
 //         CubeTexture cube = new CubeTexture();
         DisplayManager displayManager = new DisplayManager();
         center_display_canvas.addGLEventListener(displayManager);
-
+        center_display_canvas.addKeyListener(displayManager);
         getContentPane().add(center_display_canvas, BorderLayout.CENTER);
         FPSAnimator animator = new FPSAnimator(center_display_canvas, 60, true);
         animator.start();
