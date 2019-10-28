@@ -24,7 +24,7 @@ public class DisplayManager implements GLEventListener, KeyListener {
         private Robot robot;
         private Room room;
 
-        private float ex=0,ey=0,ez=2;
+        private float ex=0,ey=0,ez=20;
         public DisplayManager() {
             glu =  new GLU();
             grid = new Grid(new Point3D(0f,0f, 0f), lineCount);
