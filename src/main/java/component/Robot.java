@@ -52,22 +52,31 @@ public class Robot implements IDisplayable{
         gl2.glPopMatrix();
 
     }
-
+//    private void test() {
+//        gl2.glColor4f(Color.COLOR_RED[0], Color.COLOR_RED[1], Color.COLOR_RED[2], Color.COLOR_RED[3]);
+//        gl2.glPushMatrix();
+//        gl2.glTranslated(position.getX()-1f, position.getY()+0.6f, position.getZ());
+//        gl2.glRotated(left_Shoulder, 0, 0, 1);
+//        gl2.glTranslated(-.9f, 0, position.getZ());
+//        gl2.glScalef(.75f, .35f, 1);
+//        glut.glutWireCube(2);
+//        gl2.glPopMatrix();
+//    }
     private void DrawLefArm() {
         gl2.glColor4f(handColor[0], handColor[1], handColor[2], handColor[3]);
         // upper arm
         gl2.glPushMatrix();
         gl2.glTranslated(position.getX()-1f, position.getY()+0.6f, position.getZ());
         gl2.glRotated(left_Shoulder, 0, 0, 1);
-        gl2.glTranslated(position.getX()-.9f, position.getY(), position.getZ());
+        gl2.glTranslated(-.9f, 0, 0);
         gl2.glPushMatrix();
         gl2.glScalef(.75f, .35f, 1);
         glut.glutWireCube(2);
         gl2.glPopMatrix();
         // forearm
-        gl2.glTranslated(position.getX()-.8f, position.getY(), position.getZ());
+        gl2.glTranslated(-.8f, 0, 0);
         gl2.glRotated(left_Elbow, 0, 0, 1);
-        gl2.glTranslated(position.getX()-.8f, position.getY(), position.getZ());
+        gl2.glTranslated(-.8f,0,0);
         gl2.glPushMatrix();
         gl2.glScalef(.75f, .35f, 1);
         glut.glutWireCube(2);
@@ -83,16 +92,16 @@ public class Robot implements IDisplayable{
         gl2.glPushMatrix();
         gl2.glTranslated(position.getX()+1f, position.getY()+0.6f, position.getZ());
         gl2.glRotated(right_Shoulder, 0, 0, 1);
-        gl2.glTranslated(position.getX()+.9f, position.getY(), position.getZ());
+        gl2.glTranslated(.9f, 0, 0);
         gl2.glPushMatrix();
         gl2.glScalef(.75f, .35f, 1);
         glut.glutWireCube(2);
         gl2.glPopMatrix();
 
         // forearm
-        gl2.glTranslated(position.getX()+.8f, position.getY(), position.getZ());
+        gl2.glTranslated(.8f, 0, 0);
         gl2.glRotated(right_Elbow, 0, 0, 1);
-        gl2.glTranslated(position.getX()+.8f, position.getY(), position.getZ());
+        gl2.glTranslated(.8f, 0, 0);
         gl2.glPushMatrix();
         gl2.glScalef(.75f, .35f, 1);
         glut.glutWireCube(2);
@@ -108,16 +117,16 @@ public class Robot implements IDisplayable{
         gl2.glPushMatrix();
         gl2.glTranslated(position.getX() -.5f, position.getY() -2, position.getZ());
         gl2.glRotated(left_hip, 0, 0, 1);
-        gl2.glTranslated(position.getX(), position.getY() -1, position.getZ());
+        gl2.glTranslated(0, -1,0);
         gl2.glPushMatrix();
         gl2.glScalef(.35f, 1f, 1);
         glut.glutWireCube(2);
         gl2.glPopMatrix();
 
         //calf
-        gl2.glTranslated(position.getX(), position.getY() -1, position.getZ());
+        gl2.glTranslated(0,  -1, 0);
         gl2.glRotated(left_knee, 0, 0, 1);
-        gl2.glTranslated(position.getX(), position.getY() -1, position.getZ());
+        gl2.glTranslated(0,  -1, 0);
         gl2.glPushMatrix();
         gl2.glScalef(.35f, 1f, 1);
         glut.glutWireCube(2);
@@ -133,16 +142,16 @@ public class Robot implements IDisplayable{
         gl2.glPushMatrix();
         gl2.glTranslated(position.getX() +.5f, position.getY() -2, position.getZ());
         gl2.glRotated(right_hip, 0, 0, 1);
-        gl2.glTranslated(position.getX(), position.getY() -1, position.getZ());
+        gl2.glTranslated(0, -1, 0);
         gl2.glPushMatrix();
         gl2.glScalef(.35f, 1f, 1);
         glut.glutWireCube(2);
         gl2.glPopMatrix();
 
         //calf
-        gl2.glTranslated(position.getX(), position.getY() -1, position.getZ());
+        gl2.glTranslated(0, 0 -1, 0);
         gl2.glRotated(right_knee, 0, 0, 1);
-        gl2.glTranslated(position.getX(), position.getY() -1, position.getZ());
+        gl2.glTranslated(0,  -1, 0);
         gl2.glPushMatrix();
         gl2.glScalef(.35f, 1f, 1);
         glut.glutWireCube(2);

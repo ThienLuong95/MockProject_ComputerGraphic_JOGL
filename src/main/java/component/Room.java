@@ -11,7 +11,7 @@ public class Room implements IDisplayable {
     private int textureFront, textureBack, textureBottom, textureTop, textureRight, textureLeft;
     private float xrot,yrot,zrot;
     private GLUT glut = new GLUT();
-    private float witdh =10;
+    private float witdh =5;
     public Room( ) {
 
     }
@@ -103,10 +103,13 @@ public class Room implements IDisplayable {
         gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-witdh, witdh, -witdh);
         gl.glEnd();
 
+        IncreaseRotate();
+        gl.glDisable(GL2.GL_TEXTURE_2D);
+    }
+
+    private void IncreaseRotate() {
 //        xrot += .3f;
         yrot += .3f;
 //        zrot += .3f;
-
-        gl.glDisable(GL2.GL_TEXTURE_2D);
     }
 }

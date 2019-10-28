@@ -1,10 +1,8 @@
 package ui;
 
-import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
-import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 import common.Point3D;
 import component.Grid;
@@ -26,8 +24,8 @@ public class DisplayManager implements GLEventListener, KeyListener {
         private float ex=0,ey=0,ez=20;
         public DisplayManager() {
             glu =  new GLU();
-            grid = new Grid(new Point3D(0f,0f, 0f), lineCount);
-            robot = new Robot(new Point3D(0f, 0f, 0f));
+            grid = new Grid(new Point3D(0,0f, 0f), 10);
+            robot = new Robot(new Point3D(0f, 0f, 3f));
             room = new Room();
         }
     @Override
@@ -61,8 +59,8 @@ public class DisplayManager implements GLEventListener, KeyListener {
         glu.gluLookAt(ex, ey, ez, 0, 0, 0, 0, 1, 0);
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
         room.Display(gl);
-//        grid.Display(gl);
-//        robot.Display(gl);
+        grid.Display(gl);
+        robot.Display(gl);
         gl.glFlush();
     }
 
