@@ -48,48 +48,61 @@ public class Room implements IDisplayable {
         gl.glRotatef(zrot, 0.0f, 0.0f, 1.0f);
 
         gl.glEnable(GL2.GL_TEXTURE_2D);
-        gl.glBegin(GL2.GL_QUADS);
+
         // Front Face
         gl.glBindTexture(GL2.GL_TEXTURE_2D, textureFront);
+        gl.glBegin(GL2.GL_QUADS);
         gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-witdh, -witdh, witdh);
         gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f( witdh, -witdh, witdh);
         gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f( witdh, witdh, witdh);
         gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-witdh, witdh, witdh);
+        gl.glEnd();
+
         // Back Face
         gl.glBindTexture(GL2.GL_TEXTURE_2D, textureBack);
+        gl.glBegin(GL2.GL_QUADS);
         gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-witdh, -witdh, -witdh);
         gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-witdh, witdh, -witdh);
         gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f( witdh, witdh, -witdh);
         gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( witdh, -witdh, -witdh);
+        gl.glEnd();
 
         // Top Face
         gl.glBindTexture(GL2.GL_TEXTURE_2D, textureTop);
+        gl.glBegin(GL2.GL_QUADS);
         gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-witdh, witdh, -witdh);
         gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-witdh, witdh, witdh);
         gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f( witdh, witdh, witdh);
         gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f( witdh, witdh, -witdh);
+        gl.glEnd();
 
         // Bottom Face
-        gl.glBindTexture(GL2.GL_TEXTURE_2D, textureFront);
+        gl.glBindTexture(GL2.GL_TEXTURE_2D, textureBottom);
+        gl.glBegin(GL2.GL_QUADS);
         gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-witdh, -witdh, -witdh);
         gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f( witdh, -witdh, -witdh);
         gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( witdh, -witdh, witdh);
         gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-witdh, -witdh, witdh);
+        gl.glEnd();
 
         // Right face
         gl.glBindTexture(GL2.GL_TEXTURE_2D, textureRight);
+        gl.glBegin(GL2.GL_QUADS);
         gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f( witdh, -witdh, -witdh);
         gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f( witdh, witdh, -witdh);
         gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f( witdh, witdh, witdh);
         gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f( witdh, -witdh, witdh);
+        gl.glEnd();
 
         // Left Face
         gl.glBindTexture(GL2.GL_TEXTURE_2D, textureLeft);
+        gl.glBegin(GL2.GL_QUADS);
         gl.glTexCoord2f(0.0f, 0.0f); gl.glVertex3f(-witdh, -witdh, -witdh);
         gl.glTexCoord2f(1.0f, 0.0f); gl.glVertex3f(-witdh, -witdh, witdh);
         gl.glTexCoord2f(1.0f, 1.0f); gl.glVertex3f(-witdh, witdh, witdh);
         gl.glTexCoord2f(0.0f, 1.0f); gl.glVertex3f(-witdh, witdh, -witdh);
         gl.glEnd();
+
 //        xrot += .3f;
         yrot += .3f;
 //        zrot += .3f;

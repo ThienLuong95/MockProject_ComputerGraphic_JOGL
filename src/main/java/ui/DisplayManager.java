@@ -10,7 +10,6 @@ import common.Point3D;
 import component.Grid;
 import component.Robot;
 import component.Room;
-import javafx.scene.input.KeyCode;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
