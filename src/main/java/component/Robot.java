@@ -1,6 +1,9 @@
 package component;
 
+import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.glu.GLU;
+import com.jogamp.opengl.glu.GLUquadric;
 import com.jogamp.opengl.util.gl2.GLUT;
 import common.Point3D;
 import util.Color;
@@ -9,158 +12,205 @@ public class Robot implements IDisplayable{
     private Point3D position;
     private GL2 gl2;
     private GLUT glut;
-    private float[] bodyColor = Color.COLOR_WHITE;
+    private float[] bodyColor = Color.COLOR_RED;
     private float[] headColor = Color.COLOR_WHITE;
     private float[] legColor = Color.COLOR_WHITE;
     private float[] handColor = Color.COLOR_WHITE;
     private int left_Shoulder = 0, left_Elbow = 0, right_Shoulder = 0, right_Elbow =0;
     private int left_hip = 0, left_knee = 0, right_hip = 0, right_knee =0;
+    private int y =0;
+    private GLUquadric quadric;
+    private GLU glu;
+
+    float mat_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+    float mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float mat_shininess[] = { 50.0f };
+    float light_position[] = { 3.0f, 4.0f, 5.0f, 0.0f };
+    float model_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
     @Override
     public void Display(GL2 gl2) {
         this.gl2 = gl2;
+        gl2.glMaterialfv (GL2.GL_FRONT, GL2.GL_AMBIENT, mat_ambient,0);
+        gl2.glMaterialfv (GL2.GL_FRONT, GL2.GL_SPECULAR, mat_specular,0);
+        gl2.glMaterialfv (GL2.GL_FRONT, GL2.GL_SHININESS, mat_shininess,0);
+        gl2.glLightfv (GL2.GL_LIGHT0, GL2.GL_POSITION, light_position,0);
+        gl2.glLightModelfv (GL2.GL_LIGHT_MODEL_AMBIENT, model_ambient,0);
+
+        gl2.glEnable (GL2.GL_LIGHTING);
+        gl2.glEnable (GL2.GL_LIGHT0);
+        gl2.glEnable (GL.GL_DEPTH_TEST);
+
         DrawHead();
         DrawBody();
         DrawLefArm();
         DrawRightArm();
         DrawLeftLeg();
         DrawRightLeg();
+
+        gl2.glDisable (GL2.GL_LIGHTING);
+        gl2.glDisable (GL2.GL_LIGHT0);
+        gl2.glDisable (GL.GL_DEPTH_TEST);
     }
     public Robot( Point3D position) {
         this.position = position;
         this.glut = new GLUT();
     }
+    public void Init(GL2 gl2) {
+        glu = new GLU();
+        quadric = glu.gluNewQuadric();
+        glu.gluQuadricNormals(quadric, GLU.GLU_SMOOTH);
+        glu.gluQuadricTexture(quadric, true);
+    }
     private void DrawHead() {
-        gl2.glColor4f(headColor[0], headColor[1], headColor[2], headColor[3]);
 
         gl2.glPushMatrix();
-        gl2.glTranslated(position.getX(), position.getY()+2, position.getZ());
-        glut.glutWireCube(1);
+        gl2.glTranslated(position.getX(), position.getY()+.9, position.getZ());
+        gl2.glScalef(1.2f,.5f, .9f);
+        glu.gluSphere(quadric,1, 32 , 32);
         gl2.glPopMatrix();
+
+        gl2.glPushMatrix();
+        gl2.glTranslated(position.getX(), position.getY()+2.2, position.getZ());
+        gl2.glRotated(y, 0, 1, 0);
+        glu.gluSphere(quadric,0.65, 32 , 32);
+        gl2.glPopMatrix();
+        IncreaseHead();
     }
     private void DrawBody() {
-        gl2.glColor4f(bodyColor[0], bodyColor[1], bodyColor[2], bodyColor[3]);
-
         gl2.glPushMatrix();
-        gl2.glTranslated(position.getX(), position.getY(), position.getZ());
-        glut.glutWireCube(2);
+        gl2.glTranslated(position.getX(), position.getY()+1, position.getZ());
+        gl2.glScalef(1f, 1f, .8f);
+        gl2.glRotated(90, 1.0f, 0.0f, 0.0f);
+        glu.gluCylinder(quadric, 1.2, 1,2.2, 32, 32);
         gl2.glPopMatrix();
 
         gl2.glPushMatrix();
-        gl2.glTranslated(position.getX(), position.getY() -1.5, position.getZ());
-        gl2.glScalef(1, 0.4f, 1);
-        glut.glutWireCube(2);
+        gl2.glTranslated(position.getX(), position.getY()-1, position.getZ());
+        gl2.glScalef(1f, 1f, .76f);
+        gl2.glRotated(90, 1.0f, 0.0f, 0.0f);
+        glu.gluCylinder(quadric, .96, 1.3,1, 32, 32);
         gl2.glPopMatrix();
-
     }
-//    private void test() {
-//        gl2.glColor4f(Color.COLOR_RED[0], Color.COLOR_RED[1], Color.COLOR_RED[2], Color.COLOR_RED[3]);
-//        gl2.glPushMatrix();
-//        gl2.glTranslated(position.getX()-1f, position.getY()+0.6f, position.getZ());
-//        gl2.glRotated(left_Shoulder, 0, 0, 1);
-//        gl2.glTranslated(-.9f, 0, position.getZ());
-//        gl2.glScalef(.75f, .35f, 1);
-//        glut.glutWireCube(2);
-//        gl2.glPopMatrix();
-//    }
+
     private void DrawLefArm() {
-        gl2.glColor4f(handColor[0], handColor[1], handColor[2], handColor[3]);
         // upper arm
         gl2.glPushMatrix();
-        gl2.glTranslated(position.getX()-1f, position.getY()+0.6f, position.getZ());
+        gl2.glTranslated(position.getX()-1.4f, position.getY()+0.6f, position.getZ());
+        glu.gluSphere(quadric,0.4, 32 , 32);
+        gl2.glPopMatrix();
+
+        gl2.glPushMatrix();
+        gl2.glTranslated(position.getX()-1.2f, position.getY()+0.6f, position.getZ());
         gl2.glRotated(left_Shoulder, 0, 0, 1);
         gl2.glTranslated(-.9f, 0, 0);
         gl2.glPushMatrix();
-        gl2.glScalef(.75f, .35f, 1);
-        glut.glutWireCube(2);
+        gl2.glScalef(.8f, .35f, .35f);
+        glu.gluSphere(quadric,1, 32 , 32);
         gl2.glPopMatrix();
         // forearm
+
         gl2.glTranslated(-.8f, 0, 0);
+        glu.gluSphere(quadric,0.25, 32 , 32);
         gl2.glRotated(left_Elbow, 0, 0, 1);
         gl2.glTranslated(-.8f,0,0);
         gl2.glPushMatrix();
-        gl2.glScalef(.75f, .35f, 1);
-        glut.glutWireCube(2);
+        gl2.glScalef(.8f, .25f, .25f);
+        glu.gluSphere(quadric,1, 32 , 32);
         gl2.glPopMatrix();
+        gl2.glTranslated(-.8f,0,0);
+        glu.gluSphere(quadric,0.28, 32 , 32);
         gl2.glPopMatrix();
 
     }
 
     private void DrawRightArm() {
-        gl2.glColor4f(handColor[0], handColor[1], handColor[2], handColor[3]);
-
-        // upper arm
         gl2.glPushMatrix();
-        gl2.glTranslated(position.getX()+1f, position.getY()+0.6f, position.getZ());
+        gl2.glTranslated(position.getX()+1.4f, position.getY()+0.6f, position.getZ());
+        glu.gluSphere(quadric,0.4, 32 , 32);
+        gl2.glPopMatrix();
+
+        gl2.glPushMatrix();
+        gl2.glTranslated(position.getX()+1.2f, position.getY()+0.6f, position.getZ());
         gl2.glRotated(right_Shoulder, 0, 0, 1);
-        gl2.glTranslated(.9f, 0, 0);
+        gl2.glTranslated(+.9f, 0, 0);
         gl2.glPushMatrix();
-        gl2.glScalef(.75f, .35f, 1);
-        glut.glutWireCube(2);
+        gl2.glScalef(.8f, .35f, .35f);
+        glu.gluSphere(quadric,1, 32 , 32);
         gl2.glPopMatrix();
-
         // forearm
-        gl2.glTranslated(.8f, 0, 0);
-        gl2.glRotated(right_Elbow, 0, 0, 1);
-        gl2.glTranslated(.8f, 0, 0);
-        gl2.glPushMatrix();
-        gl2.glScalef(.75f, .35f, 1);
-        glut.glutWireCube(2);
-        gl2.glPopMatrix();
-        gl2.glPopMatrix();
 
-        //hand
+        gl2.glTranslated(+.8f, 0, 0);
+        glu.gluSphere(quadric,0.25, 32 , 32);
+        gl2.glRotated(right_Elbow, 0, 0, 1);
+        gl2.glTranslated(+.8f,0,0);
+        gl2.glPushMatrix();
+        gl2.glScalef(.8f, .25f, .25f);
+        glu.gluSphere(quadric,1, 32 , 32);
+        gl2.glPopMatrix();
+        gl2.glTranslated(+.8f,0,0);
+        glu.gluSphere(quadric,0.28, 32 , 32);
+        gl2.glPopMatrix();
     }
 
     private void DrawLeftLeg() {
-        gl2.glColor4f(legColor[0], legColor[1], legColor[2], legColor[3]);
+        gl2.glPushMatrix();
+        gl2.glTranslated(position.getX() -.5f, position.getY() -2.2, position.getZ());
+        glu.gluSphere(quadric,.8, 32 , 32);
+        gl2.glPopMatrix();
         //thigh
         gl2.glPushMatrix();
-        gl2.glTranslated(position.getX() -.5f, position.getY() -2, position.getZ());
+        gl2.glTranslated(position.getX() -.5f, position.getY() -2.5, position.getZ());
         gl2.glRotated(left_hip, 0, 0, 1);
         gl2.glTranslated(0, -1,0);
         gl2.glPushMatrix();
-        gl2.glScalef(.35f, 1f, 1);
-        glut.glutWireCube(2);
+        gl2.glScalef(.48f, 1f, .48f);
+        glu.gluSphere(quadric,1.4, 32 , 32);
         gl2.glPopMatrix();
 
         //calf
-        gl2.glTranslated(0,  -1, 0);
+        gl2.glTranslated(0,  -1.3, 0);
+        glu.gluSphere(quadric,.5, 32 , 32);
         gl2.glRotated(left_knee, 0, 0, 1);
-        gl2.glTranslated(0,  -1, 0);
+        gl2.glTranslated(0,  -1.2, 0);
         gl2.glPushMatrix();
-        gl2.glScalef(.35f, 1f, 1);
-        glut.glutWireCube(2);
+        gl2.glScalef(.35f, 1f, .35f);
+        glu.gluSphere(quadric,1.4, 32 , 32);
         gl2.glPopMatrix();
-
+        gl2.glTranslated(0,  -1.3, 0);
+        glu.gluSphere(quadric,.5, 32 , 32);
 //        foot
         gl2.glPopMatrix();
     }
 
     private void DrawRightLeg() {
-        gl2.glColor4f(legColor[0], legColor[1], legColor[2], legColor[3]);
+        gl2.glPushMatrix();
+        gl2.glTranslated(position.getX() + .5f, position.getY() - 2.2, position.getZ());
+        glu.gluSphere(quadric, .8, 32, 32);
+        gl2.glPopMatrix();
         //thigh
         gl2.glPushMatrix();
-        gl2.glTranslated(position.getX() +.5f, position.getY() -2, position.getZ());
+        gl2.glTranslated(position.getX() + .5f, position.getY() - 2.5, position.getZ());
         gl2.glRotated(right_hip, 0, 0, 1);
         gl2.glTranslated(0, -1, 0);
         gl2.glPushMatrix();
-        gl2.glScalef(.35f, 1f, 1);
-        glut.glutWireCube(2);
+        gl2.glScalef(.48f, 1f, .48f);
+        glu.gluSphere(quadric, 1.4, 32, 32);
         gl2.glPopMatrix();
 
         //calf
-        gl2.glTranslated(0, 0 -1, 0);
+        gl2.glTranslated(0, -1.3, 0);
+        glu.gluSphere(quadric, .5, 32, 32);
         gl2.glRotated(right_knee, 0, 0, 1);
-        gl2.glTranslated(0,  -1, 0);
+        gl2.glTranslated(0, -1.2, 0);
         gl2.glPushMatrix();
-        gl2.glScalef(.35f, 1f, 1);
-        glut.glutWireCube(2);
+        gl2.glScalef(.35f, 1f, .35f);
+        glu.gluSphere(quadric, 1.4, 32, 32);
         gl2.glPopMatrix();
-
+        gl2.glTranslated(0, -1.3, 0);
+        glu.gluSphere(quadric, .5, 32, 32);
 //        foot
         gl2.glPopMatrix();
     }
-
     public void LeftShoulderUp() {
         left_Shoulder = (left_Shoulder + 5) % 360;
     }
@@ -211,5 +261,8 @@ public class Robot implements IDisplayable{
     }
     public void RightKneeDown() {
         right_knee = (right_knee - 5) % 360;
+    }
+    public void IncreaseHead() {
+        y = (y + 5) % 360;
     }
 }

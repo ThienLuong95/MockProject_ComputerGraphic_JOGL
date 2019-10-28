@@ -24,9 +24,9 @@ public class DisplayManager implements GLEventListener, KeyListener {
         private float ex=0,ey=0,ez=20;
         public DisplayManager() {
             glu =  new GLU();
-            grid = new Grid(new Point3D(0,0f, 0f), 10);
-            robot = new Robot(new Point3D(0f, 0f, 3f));
             room = new Room();
+            grid = new Grid(new Point3D(0,0f, 0f), 10);
+            robot = new Robot(new Point3D(0f, 0f, -8f));
         }
     @Override
     public void init(GLAutoDrawable drawable) {
@@ -44,6 +44,7 @@ public class DisplayManager implements GLEventListener, KeyListener {
         gl.glEnable(GL2.GL_BLEND);
         gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
         room.Init(gl);
+        robot.Init(gl);
     }
 
     @Override
