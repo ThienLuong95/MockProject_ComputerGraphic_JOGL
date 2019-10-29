@@ -12,10 +12,7 @@ public class Robot implements IDisplayable{
     private Point3D position;
     private GL2 gl2;
     private GLUT glut;
-    private float[] bodyColor = Color.COLOR_RED;
-    private float[] headColor = Color.COLOR_WHITE;
-    private float[] legColor = Color.COLOR_WHITE;
-    private float[] handColor = Color.COLOR_WHITE;
+    private float scale = 1;
     private int left_Shoulder = 0, left_Elbow = 0, right_Shoulder = 0, right_Elbow =0;
     private int left_hip = 0, left_knee = 0, right_hip = 0, right_knee =0;
     private int y =0;
@@ -27,6 +24,8 @@ public class Robot implements IDisplayable{
     float mat_shininess[] = { 50.0f };
     float light_position[] = { 3.0f, 4.0f, 5.0f, 0.0f };
     float model_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+    float dissfuse_light[] = {1f, 0f, 0f, 0f};
+
     @Override
     public void Display(GL2 gl2) {
         this.gl2 = gl2;
@@ -35,11 +34,11 @@ public class Robot implements IDisplayable{
         gl2.glMaterialfv (GL2.GL_FRONT, GL2.GL_SHININESS, mat_shininess,0);
         gl2.glLightfv (GL2.GL_LIGHT0, GL2.GL_POSITION, light_position,0);
         gl2.glLightModelfv (GL2.GL_LIGHT_MODEL_AMBIENT, model_ambient,0);
-
+//        gl2.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, dissfuse_light, 0);
         gl2.glEnable (GL2.GL_LIGHTING);
         gl2.glEnable (GL2.GL_LIGHT0);
         gl2.glEnable (GL.GL_DEPTH_TEST);
-
+        gl2.glScalef(scale,scale,scale);
         DrawHead();
         DrawBody();
         DrawLefArm();
@@ -51,8 +50,9 @@ public class Robot implements IDisplayable{
         gl2.glDisable (GL2.GL_LIGHT0);
         gl2.glDisable (GL.GL_DEPTH_TEST);
     }
-    public Robot( Point3D position) {
+    public Robot( Point3D position, float scale) {
         this.position = position;
+        this.scale = scale;
         this.glut = new GLUT();
     }
     public void Init(GL2 gl2) {

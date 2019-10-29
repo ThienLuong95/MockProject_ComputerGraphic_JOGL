@@ -20,13 +20,17 @@ public class DisplayManager implements GLEventListener, KeyListener {
         private int lineCount= 10;
         private Robot robot;
         private Room room;
+        private Point3D roboLocation;
+        private float roboScale = 1f;
 
         private float ex=0,ey=0,ez=20;
         public DisplayManager() {
             glu =  new GLU();
             room = new Room();
-            grid = new Grid(new Point3D(0,0f, 0f), 10);
-            robot = new Robot(new Point3D(0f, 0f, -8f));
+            roboLocation= new Point3D(0,0,0);
+            grid = new Grid(new Point3D(0,0f, 0f), lineCount);
+            robot = new Robot(roboLocation, roboScale);
+
         }
     @Override
     public void init(GLAutoDrawable drawable) {
@@ -115,6 +119,17 @@ public class DisplayManager implements GLEventListener, KeyListener {
             case KeyEvent.VK_V : ex--; break;
             case KeyEvent.VK_B: ey--; break;
             case KeyEvent.VK_N : ez--; break;
+
+            case  KeyEvent.VK_UP: roboLocation.setZ(roboLocation.getZ()+1f);
+            case  KeyEvent.VK_DOWN: roboLocation.setZ(roboLocation.getZ()-1f);
+            case  KeyEvent.VK_LEFT: roboLocation.setX(roboLocation.getX()+1f);
+            case  KeyEvent.VK_RIGHT: roboLocation.setX(roboLocation.getX()-1f);
+            case  KeyEvent.VK_PAGE_UP: roboLocation.setY(roboLocation.getY()+1f);
+            case  KeyEvent.VK_PAGE_DOWN: roboLocation.setY(roboLocation.getY()-1);
+
+            case  KeyEvent.VK_PLUS: roboScale += 0.5; break;
+            case  KeyEvent.VK_MINUS: roboScale -= 0.5; break;
+
             default: break;
         }
     }
