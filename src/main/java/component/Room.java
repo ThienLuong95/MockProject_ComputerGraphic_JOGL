@@ -11,7 +11,7 @@ public class Room implements IDisplayable {
     private int textureFront, textureBack, textureBottom, textureTop, textureRight, textureLeft;
     private float xrot,yrot,zrot;
     private GLUT glut = new GLUT();
-    private float witdh =10;
+    private float witdh =5;
     public Room( ) {
 
     }
