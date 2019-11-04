@@ -21,14 +21,14 @@ public class DisplayManager implements GLEventListener, KeyListener {
         private Robot robot;
         private Room room;
         private Point3D roboLocation;
-        private float roboScale = 1f;
+        private float roboScale = .2f;
 
-        private float ex=0,ey=0,ez=20;
+        private float ex=0,ey=0,ez=5;
         public DisplayManager() {
             glu =  new GLU();
             room = new Room();
-            roboLocation= new Point3D(0,0,0);
-            grid = new Grid(new Point3D(0,0f, 0f), lineCount);
+            roboLocation= new Point3D(15,0,0);
+            grid = new Grid(new Point3D(0,0, 0), lineCount);
             robot = new Robot(roboLocation, roboScale);
 
         }
