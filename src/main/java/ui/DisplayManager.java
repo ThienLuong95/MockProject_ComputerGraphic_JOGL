@@ -84,7 +84,6 @@ public class DisplayManager implements GLEventListener, KeyListener {
         gl.glMatrixMode( GL2.GL_MODELVIEW );
         gl.glLoadIdentity();
         glu.gluLookAt(ex, ey, ez, 0, 0, 0, 0, 1, 0);
-
     }
 
     @Override

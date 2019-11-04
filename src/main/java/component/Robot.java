@@ -61,6 +61,12 @@ public class Robot implements IDisplayable{
         glu.gluQuadricNormals(quadric, GLU.GLU_SMOOTH);
         glu.gluQuadricTexture(quadric, true);
     }
+
+    @Override
+    public void Dispose() {
+
+    }
+
     private void DrawHead() {
 
         gl2.glPushMatrix();

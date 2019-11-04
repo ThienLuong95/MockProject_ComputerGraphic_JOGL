@@ -11,7 +11,7 @@ public class Room implements IDisplayable {
     private int textureFront, textureBack, textureBottom, textureTop, textureRight, textureLeft;
     private float xrot,yrot,zrot;
     private GLUT glut = new GLUT();
-    private float witdh =5;
+    private float witdh =10;
     public Room( ) {
 
     }
@@ -23,6 +23,12 @@ public class Room implements IDisplayable {
         textureLeft = LoadTexture("left.png", gl);
         textureRight = LoadTexture("right.png", gl);
     }
+
+    @Override
+    public void Dispose() {
+
+    }
+
     private int LoadTexture(String name, GL2 gl){
         Texture t = null;
         try

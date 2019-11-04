@@ -116,6 +116,16 @@ public class Grid implements IDisplayable {
         gl.glPopMatrix();
     }
 
+    @Override
+    public void Init(GL2 gl2) {
+
+    }
+
+    @Override
+    public void Dispose() {
+
+    }
+
     public float[] getGridColor() {
         return gridColor;
     }
