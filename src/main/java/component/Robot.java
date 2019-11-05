@@ -19,12 +19,13 @@ public class Robot implements IDisplayable{
     private GLUquadric quadric;
     private GLU glu;
 
-    float mat_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-    float mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    // mau cua vat
+    float mat_ambient[] = { 1f, 0f, 0f, 1.0f };
+    float mat_specular[] = { 1.0f, 0.0f, 0.0f, 1.0f };
     float mat_shininess[] = { 50.0f };
     float light_position[] = { 3.0f, 4.0f, 5.0f, 0.0f };
-    float model_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-    float dissfuse_light[] = {1f, 0f, 0f, 0f};
+    float model_ambient[] = { 1f, 0f, 0f, 1f };
+    float dissfuse_light[] = {1f, 0f, 0f, 1f};
 
     @Override
     public void Display(GL2 gl2) {
@@ -34,7 +35,7 @@ public class Robot implements IDisplayable{
         gl2.glMaterialfv (GL2.GL_FRONT, GL2.GL_SHININESS, mat_shininess,0);
         gl2.glLightfv (GL2.GL_LIGHT0, GL2.GL_POSITION, light_position,0);
         gl2.glLightModelfv (GL2.GL_LIGHT_MODEL_AMBIENT, model_ambient,0);
-//        gl2.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, dissfuse_light, 0);
+        gl2.glLightfv(GL2.GL_LIGHT0, GL2.GL_DIFFUSE, dissfuse_light, 0);
         gl2.glEnable (GL2.GL_LIGHTING);
         gl2.glEnable (GL2.GL_LIGHT0);
         gl2.glEnable (GL.GL_DEPTH_TEST);
@@ -45,7 +46,7 @@ public class Robot implements IDisplayable{
         DrawRightArm();
         DrawLeftLeg();
         DrawRightLeg();
-
+//
         gl2.glDisable (GL2.GL_LIGHTING);
         gl2.glDisable (GL2.GL_LIGHT0);
         gl2.glDisable (GL.GL_DEPTH_TEST);

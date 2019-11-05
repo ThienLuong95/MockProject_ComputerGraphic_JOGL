@@ -68,7 +68,7 @@ public class Room implements IDisplayable {
         gl.glVertex3f(-witdh, witdh, witdh);
         gl.glEnd();
 
-        // Back Face
+//         Back Face
         gl.glBindTexture(GL2.GL_TEXTURE_2D, textureBack);
         gl.glBegin(GL2.GL_QUADS);
         gl.glTexCoord2f(1.0f, 0.0f);
